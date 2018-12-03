@@ -1,0 +1,73 @@
+{
+	"name": "minijava-vscode",
+	"description": "A plugin for a subset of Java",
+	"author": "Peter Zeller",
+	"license": "MIT",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/peterzeller/minijava-vscode"
+	},
+	"publisher": "peterzeller",
+	"categories": [],
+	"keywords": [
+		"Minijava"
+	],
+	"engines": {
+		"vscode": "^1.28.2"
+	},
+	"activationEvents": [
+		"onLanguage:java"
+	],
+	"main": "./out/extension",
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Settings for the minijava plugin",
+			"properties": {
+				"minijava.javaExecutable": {
+					"scope": "window",
+					"type": "string",
+					"default": "java",
+					"description": "Which Java executable to use."
+				},
+				"minijava.minijavaJar": {
+					"scope": "window",
+					"type": "string",
+					"default": "$HOME/.minijava/minijava.jar",
+					"description": "Where to find the minijava.jar file.\nYou can find this in your MiniJava project under `build/install/minijava/lib/minijava.jar` after running `gradle install`."
+				},
+				"minijava.fileExtension": {
+					"scope": "window",
+					"type": "string",
+					"default": "java",
+					"description": "For which files the language server should be active"
+				},
+				"minijava.debugMode": {
+					"scope": "window",
+					"type": "boolean",
+					"default": "false",
+					"description": "Activates debug mode -- opens port 5005 for attaching a Java debugger"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run update-vscode && npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	},
+	"dependencies": {
+		"vscode": "~1.1.22",
+		"vscode-languageclient": "^4.1.4",
+		"os-homedir": "^1.0.2"
+	},
+	"devDependencies": {
+		"@types/mocha": "^5.2.0",
+		"@types/node": "^8.0.0",
+		"@types/os-homedir": "^1.0.0",
+		"tslint": "^5.11.0",
+		"typescript": "^3.1.3"
+	}
+}
